@@ -11,6 +11,8 @@ object SparkAppStarter extends App{
     .getOrCreate()
 
 
+  import com.microsoft.ml.spark.stages.Lambda
+
   val snowLeopardQueries = List("snow leopard")
   val snowLeopardUrls = bingPhotoSearch("snow leopard", snowLeopardQueries, pages=100)
   displayDF(snowLeopardUrls)
