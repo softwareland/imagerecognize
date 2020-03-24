@@ -42,6 +42,24 @@ object PhotoSearch {
       .setContent()
       .setVisible()
   }
+
+  def getRandomWords()(implicit spark:SparkSession) = {
+    spark
+      .read
+      .parquet("wasb://publicwasb@mmlspark.blob.core.windows.net/random_words.parquet").cache()
+  }
+
+  def getImages(snowLeopardUrls: DataFrame, randomLinks:DataFrame) = {
+    snowLeopardUrls
+      .union(randomLinks)
+      .distinct()
+      .repartition(100)
+    .mlTransform(BingImageSearch.downloadFromUrls("urls", "image", concurrency=5, timeout=5000))
+  }
+
+  def trainTestImages(images:DataFrame) = {
+    images.randomSplit(Array(.7,.3), seed=1)
+  }
 }
 
 case class Photo(query: String, offset: Int)
