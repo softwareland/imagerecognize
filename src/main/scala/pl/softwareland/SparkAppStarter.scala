@@ -15,6 +15,16 @@ object SparkAppStarter extends App{
   val snowLeopardUrls = bingPhotoSearch("snow leopard", snowLeopardQueries, pages=100)
   displayDF(snowLeopardUrls)
 
+  val randomWords = getRandomWords()
+  randomWords.show(false)
 
+  val randomLinks = getRandomLinks(randomWords)
+
+  val images = getImages(snowLeopardUrls, randomLinks)
+
+  val train, test = trainTestImages(images)
+
+  println(train.length)
+  println(test.length)
 
 }

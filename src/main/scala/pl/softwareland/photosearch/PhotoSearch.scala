@@ -49,6 +49,18 @@ object PhotoSearch {
       .parquet("wasb://publicwasb@mmlspark.blob.core.windows.net/random_words.parquet").cache()
   }
 
+  def getRandomLinks(randomWords:DataFrame) = {
+    randomWords
+      .mlTransform(new BingImageSearch()
+      .setSubscriptionKey("8a030b57d71f4b64ba140a43f5c4b9dc")
+      .setCount(10)
+      .setQueryCol("words")
+      .setOutputCol("images"))
+    .mlTransform(BingImageSearch.getUrlTransformer("images", "urls"))
+    .withColumn("label", lit("other"))
+    .limit(400)
+  }
+
   def getImages(snowLeopardUrls: DataFrame, randomLinks:DataFrame) = {
     snowLeopardUrls
       .union(randomLinks)
