@@ -1,10 +1,6 @@
-
-
 name := "imagerecognize"
 version := "1.0"
 scalaVersion := "2.11.12"
-
-//unmanagedJars in Compile += file("lib/mmlspark-assembly-1.0.0-rc1-75-99795bc3-SNAPSHOT.jar")
 
 resolvers += "MMLSpark Repo" at "https://mmlspark.azureedge.net/maven"
 
