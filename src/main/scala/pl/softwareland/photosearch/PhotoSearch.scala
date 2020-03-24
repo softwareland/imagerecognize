@@ -18,7 +18,7 @@ object PhotoSearch {
     parameters.toDF("queries", "offsets")
       .mlTransform(
         new BingImageSearch()
-          .setSubscriptionKey("8a030b57d71f4b64ba140a43f5c4b9dc")
+          .setSubscriptionKey("your key")
           .setOffsetCol("offsets")
           .setQueryCol("queries")
           .setCount(10)
@@ -52,7 +52,7 @@ object PhotoSearch {
   def getRandomLinks(randomWords:DataFrame) = {
     randomWords
       .mlTransform(new BingImageSearch()
-      .setSubscriptionKey("8a030b57d71f4b64ba140a43f5c4b9dc")
+      .setSubscriptionKey("your key")
       .setCount(10)
       .setQueryCol("words")
       .setOutputCol("images"))

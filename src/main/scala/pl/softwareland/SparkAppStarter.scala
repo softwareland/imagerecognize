@@ -24,7 +24,5 @@ object SparkAppStarter extends App{
 
   val train, test = trainTestImages(images)
 
-  println(train.length)
-  println(test.length)
 
 }
