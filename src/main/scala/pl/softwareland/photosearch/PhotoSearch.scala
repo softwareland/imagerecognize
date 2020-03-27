@@ -43,10 +43,10 @@ object PhotoSearch {
       .setVisible()
   }
 
-  def getRandomWords()(implicit spark:SparkSession) = {
-    spark
+  def getRandomWords(implicit spark:SparkSession) = {
+   spark
       .read
-      .parquet("wasb://publicwasb@mmlspark.blob.core.windows.net/random_words.parquet").cache()
+      .parquet("random_words.parquet")
   }
 
   def getRandomLinks(randomWords:DataFrame) = {
